@@ -4,7 +4,11 @@ public class StrategyRegistrar {
 
   private static final Strategy[] STRATEGIES = new Strategy[] {
       new SampleStrategy(),
-      new TikForTatStrategy()
+      new GenerousTikForTatStrategy(),
+      new FriedmanStrategy(),
+      new GraaskampStrategy(),
+      new TikForTatStrategy(),
+      new JossStrategy()
   };
 
   public static Strategy[] getStrategies() {
