@@ -1,5 +1,6 @@
 package com.pohorelov.oop;
 
+import com.pohorelov.oop.decision.BetrayDecision;
 import com.pohorelov.oop.decision.CooperateDecision;
 import com.pohorelov.oop.decision.Decision;
 import com.pohorelov.oop.strategy.Strategy;
