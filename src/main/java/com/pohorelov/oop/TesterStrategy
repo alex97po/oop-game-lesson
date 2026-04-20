@@ -1,0 +1,18 @@
+public class MyStrategy extends Strategy {
+
+    public Decision decide(Decision[] yourDecisions,
+                           Decision[] opponentDecisions,
+                           int currentTurnIndex) {
+
+        if (currentTurnIndex == 0) {
+            return CooperateDecision.getInstance();
+        }
+        if (opponentDecisions[currentTurnIndex - 1] instanceof BetrayDecision) {
+            return BetrayDecision.getInstance();
+        }
+        if (currentTurnIndex % 2 == 0) {
+            return BetrayDecision.getInstance();
+        }
+        return CooperateDecision.getInstance();
+    }
+}
