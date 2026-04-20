@@ -91,7 +91,13 @@ public class Tournament {
    * calculate average and write in average[i].
    */
   private void calculateAverage() {
-    // TODO
+    for (int i = 0; i < participants.length; i++) {
+      int sum = 0;
+      for (int j = 0; j < NUMBER_OF_GAMES; j++) {
+        sum += score[j][i];
+      }
+      average[i] = (double) sum / NUMBER_OF_GAMES;
+    }
   }
 
   /**
