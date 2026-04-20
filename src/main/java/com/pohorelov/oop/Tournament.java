@@ -88,7 +88,27 @@ public class Tournament {
    * @return
    */
   private Strategy[] sortParticipantsToLeaderBoard() {
-    // TODO
+    int n = average.length;
+
+    // Зовнішній цикл проходить по всьому масиву
+    for (int i = 0; i < n - 1; i++) {
+      // Внутрішній цикл порівнює сусідні елементи
+      for (int j = 0; j < n - i - 1; j++) {
+        // Якщо поточний бал менший за наступний — міняємо їх місцями (спадний порядок)
+        if (average[j] < average[j + 1]) {
+
+          // 1. Міняємо місцями бали в масиві scores
+          double tempScore = average[j];
+          average[j] = average[j + 1];
+          average[j + 1] = tempScore;
+
+          // 2. КРИТИЧНО: Міняємо місцями стратегії в масиві participants за тими ж індексами
+          Strategy tempStrategy = participants[j];
+          participants[j] = participants[j + 1];
+          participants[j + 1] = tempStrategy;
+        }
+      }
+    }
     return participants;
   }
 
