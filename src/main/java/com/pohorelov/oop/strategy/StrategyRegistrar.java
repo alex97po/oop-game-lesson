@@ -8,7 +8,8 @@ public class StrategyRegistrar {
       new FriedmanStrategy(),
       new GraaskampStrategy(),
       new TikForTatStrategy(),
-      new JossStrategy()
+      new JossStrategy(),
+      new TesterStrategy()
   };
 
   public static Strategy[] getStrategies() {
