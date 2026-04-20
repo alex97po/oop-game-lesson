@@ -7,7 +7,8 @@ public class StrategyRegistrar {
       new GenerousTikForTatStrategy(),
       new FriedmanStrategy(),
       new GraaskampStrategy(),
-      new TikForTatStrategy()
+      new TikForTatStrategy(),
+      new JossStrategy()
   };
 
   public static Strategy[] getStrategies() {
