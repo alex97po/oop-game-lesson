@@ -9,7 +9,8 @@ public class StrategyRegistrar {
       new GraaskampStrategy(),
       new TikForTatStrategy(),
       new JossStrategy(),
-      new TesterStrategy()
+      new TesterStrategy(),
+      new RandomStrategy()
   };
 
   public static Strategy[] getStrategies() {
