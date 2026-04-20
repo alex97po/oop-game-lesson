@@ -1,5 +1,6 @@
 package com.pohorelov.oop;
 
+import com.pohorelov.oop.decision.CooperateDecision;
 import com.pohorelov.oop.decision.Decision;
 import com.pohorelov.oop.strategy.Strategy;
 
@@ -70,8 +71,19 @@ public class Tournament {
    * @return
    */
   private int[] calculateTurnOutcome(Decision first, Decision second) {
-    //TODO
-    return new int[0];
+    if (first instanceof CooperateDecision && second instanceof CooperateDecision) {
+      return new int[]{3, 3};
+    }
+
+    if (first instanceof CooperateDecision && second instanceof BetrayDecision) {
+      return new int[]{0, 5};
+    }
+
+    if (first instanceof BetrayDecision && second instanceof CooperateDecision) {
+      return new int[]{5, 0};
+    }
+
+    return new int[]{1, 1};
   }
 
   /**
