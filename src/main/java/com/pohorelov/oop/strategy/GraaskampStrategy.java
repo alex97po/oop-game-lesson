@@ -13,7 +13,7 @@ public class GraaskampStrategy extends Strategy {
     if (currentTurnIndex == 0) {
       return CooperateDecision.getInstance();
     }
-    if (currentTurnIndex + 1 % 50 == 0) {
+    if ((currentTurnIndex + 1) % 50 == 0) {
       return BetrayDecision.getInstance();
     }
     return opponentDecisions[currentTurnIndex-1];

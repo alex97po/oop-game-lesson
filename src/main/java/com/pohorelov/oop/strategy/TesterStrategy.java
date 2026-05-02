@@ -13,12 +13,11 @@ public class TesterStrategy extends Strategy {
     if (currentTurnIndex == 0) {
       return BetrayDecision.getInstance();
     }
-    if (opponentDecisions[currentTurnIndex - 1] instanceof BetrayDecision) {
-      return BetrayDecision.getInstance();
+    if (opponentDecisions[0] instanceof BetrayDecision) {
+      return opponentDecisions[currentTurnIndex-1];
     }
-    if (currentTurnIndex % 2 == 0) {
-      return BetrayDecision.getInstance();
-    }
-    return CooperateDecision.getInstance();
+    return currentTurnIndex % 2 == 0
+        ? BetrayDecision.getInstance()
+        : CooperateDecision.getInstance();
   }
 }

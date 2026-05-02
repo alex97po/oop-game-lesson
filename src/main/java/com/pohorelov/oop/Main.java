@@ -2,7 +2,6 @@ package com.pohorelov.oop;
 
 import com.pohorelov.oop.strategy.Strategy;
 import com.pohorelov.oop.strategy.StrategyRegistrar;
-import java.util.Arrays;
 
 public class Main {
 
@@ -10,7 +9,9 @@ public class Main {
     Tournament tournament = new Tournament();
     tournament.registerParticipants(StrategyRegistrar.getStrategies());
     Strategy[] leaderBoard = tournament.run();
-    System.out.println(Arrays.toString(leaderBoard));
+    for (int i = 0; i < leaderBoard.length; i++) {
+      System.out.println(i + 1 + ". " + leaderBoard[i]);
+    }
   }
 
 }

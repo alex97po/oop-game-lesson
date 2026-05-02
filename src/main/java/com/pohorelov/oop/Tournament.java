@@ -60,6 +60,8 @@ public class Tournament {
                        int[] currentScore) {
     Decision firstCurrentDecision = first.decide(firstDecisions, secondDecisions, currentTurnIndex);
     Decision secondCurrentDecision = second.decide(secondDecisions, firstDecisions, currentTurnIndex);
+    firstDecisions[currentTurnIndex] = firstCurrentDecision;
+    secondDecisions[currentTurnIndex] = secondCurrentDecision;
     int[] turnOutcome = calculateTurnOutcome(firstCurrentDecision, secondCurrentDecision);
     currentScore[firstIndex] += turnOutcome[0];
     currentScore[secondIndex] += turnOutcome[1];
