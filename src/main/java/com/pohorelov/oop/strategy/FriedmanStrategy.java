@@ -4,7 +4,7 @@ import com.pohorelov.oop.decision.BetrayDecision;
 import com.pohorelov.oop.decision.CooperateDecision;
 import com.pohorelov.oop.decision.Decision;
 
-public class FriedmanStrategy extends Strategy {
+public class FriedmanStrategy implements Strategy {
 
   @Override
   public Decision decide(Decision[] yourDecision,
@@ -21,6 +21,11 @@ public class FriedmanStrategy extends Strategy {
       return BetrayDecision.getInstance();
     }
     return CooperateDecision.getInstance();
+  }
+
+  @Override
+  public String toString() {
+    return "This is Friedman strategy!";
   }
 
 }

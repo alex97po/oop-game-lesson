@@ -5,7 +5,7 @@ import com.pohorelov.oop.decision.CooperateDecision;
 import com.pohorelov.oop.decision.Decision;
 import com.pohorelov.oop.util.RandomUtil;
 
-public class JossStrategy extends Strategy {
+public class JossStrategy implements Strategy {
 
     @Override
     public Decision decide(

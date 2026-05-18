@@ -3,24 +3,46 @@ package com.pohorelov.oop;
 import com.pohorelov.oop.decision.BetrayDecision;
 import com.pohorelov.oop.decision.CooperateDecision;
 import com.pohorelov.oop.decision.Decision;
+import com.pohorelov.oop.end.EndGameStrategy;
+import com.pohorelov.oop.noise.NoiseStrategy;
 import com.pohorelov.oop.strategy.Strategy;
+import com.pohorelov.oop.strategy.StrategyScanner;
 
 public class Tournament {
-
-  private static final int NUMBER_OF_GAMES = 5;
-  private static final int NUMBER_OF_TURNS = 200;
 
   private Strategy[] participants;
   private int[][] score; //[[1, 2], [3, 4], [5, 6]]
   private double[] average; // [3, 4]
 
-  public void registerParticipants(Strategy[] strategies) {
+  private int numberOfGames;
+
+  private NoiseStrategy noiseStrategy;
+  private EndGameStrategy endGameStrategy;
+
+  public void configureTournament(NoiseStrategy noiseStrategy,
+                                  EndGameStrategy endGameStrategy) {
+    if (this.noiseStrategy != null) {
+      System.out.println("Noise strategy is already configured for this tournament! Please create a new one");
+      return;
+    }
+    this.noiseStrategy = noiseStrategy;
+    if (this.endGameStrategy != null) {
+      System.out.println("End game strategy is already configured for this tournament! Please create a new one");
+      return;
+    }
+    this.endGameStrategy = endGameStrategy;
+
+    registerParticipants();
+  }
+
+  private void registerParticipants() {
     if (this.participants != null) {
       System.out.println("This tournament already has registered participants! Please create a new one");
       return;
     }
-    this.participants = strategies;
-    this.score = new int[NUMBER_OF_GAMES][participants.length];
+    this.numberOfGames = endGameStrategy.getNumberOfGames();
+    this.participants = StrategyScanner.discoverStrategies();
+    this.score = new int[numberOfGames][participants.length];
     this.average = new double[participants.length];
   }
 
@@ -29,7 +51,15 @@ public class Tournament {
       System.out.println("No participants registered for this tournament! Register participants first!");
       return new Strategy[0];
     }
-    for (int i = 0; i < NUMBER_OF_GAMES; i++) {
+    if (this.noiseStrategy == null) {
+      System.out.println("Noise strategy is not defined! Register configure the tournament first!");
+      return new Strategy[0];
+    }
+    if (this.endGameStrategy == null) {
+      System.out.println("End game strategy is not defined! Register configure the tournament first!");
+      return new Strategy[0];
+    }
+    for (int i = 0; i < numberOfGames; i++) {
       runGame(score[i]);
     }
     calculateAverage();
@@ -41,9 +71,9 @@ public class Tournament {
       for (int j = i; j < participants.length; j++) {
         Strategy first = participants[i];
         Strategy second = participants[j];
-        Decision[] firstDecisions = new Decision[NUMBER_OF_TURNS];
-        Decision[] secondDecisions = new Decision[NUMBER_OF_TURNS];
-        for (int k = 0; k < NUMBER_OF_TURNS; k++) {
+        Decision[] firstDecisions = new Decision[numberOfGames];
+        Decision[] secondDecisions = new Decision[numberOfGames];
+        for (int k = 0; k < numberOfGames; k++) {
           runTurn(first, second, firstDecisions, secondDecisions, k, i, j, currentScore);
         }
       }
@@ -60,6 +90,11 @@ public class Tournament {
                        int[] currentScore) {
     Decision firstCurrentDecision = first.decide(firstDecisions, secondDecisions, currentTurnIndex);
     Decision secondCurrentDecision = second.decide(secondDecisions, firstDecisions, currentTurnIndex);
+
+    // NOISE STRATEGY MUST WORK HERE!!!!
+    firstCurrentDecision = noiseStrategy.applyNoiseIfNeeded(firstCurrentDecision); // noNoiseStrategy
+    secondCurrentDecision = noiseStrategy.applyNoiseIfNeeded(secondCurrentDecision);
+
     firstDecisions[currentTurnIndex] = firstCurrentDecision;
     secondDecisions[currentTurnIndex] = secondCurrentDecision;
     int[] turnOutcome = calculateTurnOutcome(firstCurrentDecision, secondCurrentDecision);
@@ -96,10 +131,10 @@ public class Tournament {
   private void calculateAverage() {
     for (int i = 0; i < participants.length; i++) {
       int sum = 0;
-      for (int j = 0; j < NUMBER_OF_GAMES; j++) {
+      for (int j = 0; j < numberOfGames; j++) {
         sum += score[j][i];
       }
-      average[i] = (double) sum / NUMBER_OF_GAMES;
+      average[i] = (double) sum / numberOfGames;
     }
   }
 

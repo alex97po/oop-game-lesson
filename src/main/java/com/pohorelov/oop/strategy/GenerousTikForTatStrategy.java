@@ -5,7 +5,7 @@ import com.pohorelov.oop.decision.CooperateDecision;
 import com.pohorelov.oop.decision.Decision;
 import com.pohorelov.oop.util.RandomUtil;
 
-public class GenerousTikForTatStrategy extends Strategy {
+public class GenerousTikForTatStrategy implements Strategy {
 
   @Override
   public Decision decide(Decision[] yourDecision,

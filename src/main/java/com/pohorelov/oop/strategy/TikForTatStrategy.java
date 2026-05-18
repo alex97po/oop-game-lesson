@@ -3,7 +3,7 @@ package com.pohorelov.oop.strategy;
 import com.pohorelov.oop.decision.CooperateDecision;
 import com.pohorelov.oop.decision.Decision;
 
-public class TikForTatStrategy extends Strategy {
+public class TikForTatStrategy implements Strategy {
 
   @Override
   public Decision decide(Decision[] yourDecision,

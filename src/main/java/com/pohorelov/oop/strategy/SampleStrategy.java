@@ -4,7 +4,7 @@ import com.pohorelov.oop.decision.BetrayDecision;
 import com.pohorelov.oop.decision.CooperateDecision;
 import com.pohorelov.oop.decision.Decision;
 
-public class SampleStrategy extends Strategy {
+public class SampleStrategy implements Strategy {
 
   @Override
   public Decision decide(Decision[] yourDecision,

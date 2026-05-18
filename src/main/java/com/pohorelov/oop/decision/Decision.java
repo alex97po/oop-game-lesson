@@ -1,5 +1,7 @@
 package com.pohorelov.oop.decision;
 
-public abstract sealed class Decision permits BetrayDecision, CooperateDecision {
+public sealed interface Decision permits BetrayDecision, CooperateDecision {
+
+  Decision getOpposite();
 
 }

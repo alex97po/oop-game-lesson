@@ -4,7 +4,7 @@ import com.pohorelov.oop.decision.BetrayDecision;
 import com.pohorelov.oop.decision.CooperateDecision;
 import com.pohorelov.oop.decision.Decision;
 
-public class GraaskampStrategy extends Strategy {
+public class GraaskampStrategy implements Strategy {
 
   // Same as Joss, but betrays not in 10%, but on each 50th round
   @Override

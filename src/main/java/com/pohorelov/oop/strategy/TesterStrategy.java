@@ -4,7 +4,7 @@ import com.pohorelov.oop.decision.BetrayDecision;
 import com.pohorelov.oop.decision.CooperateDecision;
 import com.pohorelov.oop.decision.Decision;
 
-public class TesterStrategy extends Strategy {
+public class TesterStrategy implements Strategy {
 
   public Decision decide(Decision[] yourDecisions,
                          Decision[] opponentDecisions,
